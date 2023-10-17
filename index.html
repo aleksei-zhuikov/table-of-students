@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorting Students</title>
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<bod>
+  <section class="main pb-4">
+    <div class="container">
+      <h1>Студенты</h1>
+      <p>поле c пометкой <span class="requiredStar font-weight-bold"></span> обязательно должно быть заполнено</p>
+
+      <form class="mb-5 _clear " action="" id="addStudent">
+        <div class="mb-3">
+          <label for="input-surname" class="font-weight-bold text-monospace requiredStar">Введите Фамилию
+            студента</label>
+          <input class="form-control" name="input-surname" id="input-surname" type="text" placeholder="Фамилия"
+            autocomplete="off" required>
+        </div>
+        <div class="mb-3">
+          <label for="input-name" class="font-weight-bold text-monospace requiredStar">Введите Имя
+            студента</label>
+          <input class="form-control" name="input-name" id="input-name" type="text" placeholder="Имя" autocomplete="off"
+            required>
+        </div>
+        <div class="mb-3">
+          <label for="input-lastname" class="font-weight-bold text-monospace requiredStar">Введите Отчество
+            студента</label>
+          <input class="form-control" name="input-lastname" id="input-lastname" type="text" placeholder="Отчество"
+            autocomplete="off" required>
+        </div>
+        <div class="mb-3">
+          <label for="input-startLearn" class="font-weight-bold text-monospace requiredStar">Укажите год начала
+            обучения (от 2000 до текущего)</label>
+          <input class="form-control" name="input-startLearn" id="input-startLearn" type="number" min="2000"
+            placeholder="Введите год" autocomplete="off" required>
+        </div>
+        <div class="mb-3">
+          <label for="input-birthDay" class="font-weight-bold text-monospace requiredStar">Укажите дату рождения
+            студента</label>
+          <input class="form-control" name="input-birthDay" id="input-birthDay" type="date" min="1900-01-01"
+            placeholder="Дата рождения" autocomplete="off" required>
+        </div>
+        <div class="mb-3">
+          <label for="input-faculty" class="font-weight-bold text-monospace requiredStar">Введите Факультет
+            студента</label>
+          <input class="form-control" name="input-faculty" id="input-faculty" type="text" placeholder="Факультет"
+            autocomplete="off" required>
+        </div>
+        <button id="btn-add" class="btn btn-primary cursor">Добавить</button>
+      </form>
+
+      <div class="d-flex gap-2 align-items-start">
+        <p class="font-weight-bold mr-2">Фильтрация по нескольким параметрам:</p>
+        <button id="show-filter" class="btn_show-filter">показать</button>
+      </div>
+
+      <form id="myFilter" class="mb-4">
+        <div class="d-flex">
+          <div class="col pl-0 pr-3">
+            <input type="text" class="form-control form-control-sm" placeholder="ФИО">
+          </div>
+          <div class="col pl-0 pr-3">
+            <input type="text" class="form-control form-control-sm" placeholder="Дате рождения">
+          </div>
+          <div class="col pl-0 pr-3">
+            <input type="text" class="form-control form-control-sm" placeholder="Год обучения">
+          </div>
+          <div class="col pl-0 pr-3">
+            <input type="text" class="form-control form-control-sm" placeholder="Факультет">
+          </div>
+          <button type="submit" id="btn-filter" class="btn btn-sm btn-primary blank">Фильтровать</button>
+        </div>
+      </form>
+
+      <table class="table table-striped studentsTable">
+        <thead>
+          <th data-column="fio">ФИО</th>
+          <th data-column="birthDate">Дата рождения</th>
+          <th data-column="startLearn">Годы обучения</th>
+          <th data-column="faculty">Факультет</th>
+        </thead>
+        <tbody id="students-list">
+          <!-- Render students list -->
+        </tbody>
+      </table>
+
+
+    </div>
+  </section>
+
+
+  <script defer type="module" src="./js/main.js"></script>
+</bod>
+
+</html>
