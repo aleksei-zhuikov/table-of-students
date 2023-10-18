@@ -61,21 +61,22 @@
         <button id="show-filter" class="btn_show-filter">показать</button>
       </div>
 
-      <form id="myFilter" class="mb-4">
-        <div class="d-flex">
+      <form id="filter-form" class="mb-4">
+        <div class="d-flex mb-3">
           <div class="col pl-0 pr-3">
-            <input type="text" class="form-control form-control-sm" placeholder="ФИО">
+            <input id="filter-fioVal" type="text" class="form-control form-control-sm" placeholder="ФИО">
           </div>
           <div class="col pl-0 pr-3">
-            <input type="text" class="form-control form-control-sm" placeholder="Дате рождения">
+            <input id="filter-birthDateVal" type="text" class="form-control form-control-sm"
+              placeholder="Дате рождения">
           </div>
           <div class="col pl-0 pr-3">
-            <input type="text" class="form-control form-control-sm" placeholder="Год обучения">
+            <input id="filter-yearLearnVal" type="text" class="form-control form-control-sm" placeholder="Год обучения">
           </div>
           <div class="col pl-0 pr-3">
-            <input type="text" class="form-control form-control-sm" placeholder="Факультет">
+            <input id="filter-facultyVal" type="text" class="form-control form-control-sm" placeholder="Факультет">
           </div>
-          <button type="submit" id="btn-filter" class="btn btn-sm btn-primary blank">Фильтровать</button>
+          <button type="submit" id="btn-filter" class="btn btn-sm btn-primary">Фильтровать</button>
         </div>
       </form>
 

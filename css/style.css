@@ -34,6 +34,7 @@ img {
 
 body {
   font-family: Arial, Verdana, sans-serif;
+  min-width: 320px
 }
 
 .container {
@@ -86,11 +87,11 @@ body {
   cursor: pointer;
 }
 
-#myFilter {
+#filter-form {
   transform: translateX(-200%);
   transition: transform 0.5s ease;
 }
 
-#myFilter.show {
+#filter-form.show {
   transform: translateX(0%);
 }
