@@ -1,9 +1,11 @@
 import Student from './student.js'
 // Массив Студентов
 const students = [
-  // new Student('Игорь', 'Фролов', 'Сергеевич', 2011, new Date(1992, 2, 21), 'Строительный'),
-  // new Student('Алена', 'Белых', 'Юрьевна', 2021, new Date(1998, 4, 11), 'Инжинерный'),
+  new Student('Игорь', 'Фролов', 'Сергеевич', 2011, new Date(1992, 2, 21), 'Строительный'),
+  new Student('Алена', 'Белых', 'Александровна', 2021, new Date(1998, 4, 11), 'Инжинерный'),
   new Student('Иван', 'Иванов', 'Иванович', 2001, new Date(1987, 1, 23), 'Авиационный'),
+  new Student('Александр', 'Мухин', 'Сергеевич', 2011, new Date(1992, 2, 21), 'Химический'),
+  new Student('Марфа', 'Иванова', 'Алексеевна', 2011, new Date(1992, 2, 21), 'Химический'),
 ]
 
 const $studentsList = document.getElementById('students-list')
@@ -12,6 +14,8 @@ const formEl = document.querySelector('#addStudent')
 const inputsEl = formEl.querySelectorAll('input')
 const btnAddEl = formEl.querySelector('#btn-add')
 const btnShowFilterEl = document.querySelector('#show-filter')
+const formFilterEl = document.querySelector('#filter-form')
+
 
 let column = 'fio',
   columnDir = true;
@@ -47,6 +51,16 @@ function getSortStudents(prop, dir) {
   })
 }
 
+// Фильтр студентов по параметрам
+function filterStudents(arr, prop, value) {
+  const sortedArr = []
+  const copyArr = [...arr]
+  for (const item of copyArr) {
+    if (String(item[prop]).match(new RegExp(value, 'i'))) sortedArr.push(item)
+  }
+  return sortedArr
+}
+
 // Рендер
 function render() {
   let studentsCopy = [...students]
@@ -54,10 +68,28 @@ function render() {
   studentsCopy = getSortStudents(column, columnDir)
 
   $studentsList.innerHTML = ''
+
+  // получаем значения из input фильтрация
+  const fioVal = document.querySelector('#filter-fioVal').value,
+    birthDateVal = document.querySelector('#filter-birthDateVal').value,
+    yearLearnVal = document.querySelector('#filter-yearLearnVal').value,
+    facultyVal = document.querySelector('#filter-facultyVal').value
+
+  if (fioVal !== '') studentsCopy = filterStudents(studentsCopy, 'fio', fioVal)
+  if (birthDateVal !== '') studentsCopy = filterStudents(studentsCopy, 'birthDate', birthDateVal)
+  if (yearLearnVal !== '') studentsCopy = filterStudents(studentsCopy, 'startLearn', yearLearnVal)
+  if (facultyVal !== '') studentsCopy = filterStudents(studentsCopy, 'faculty', facultyVal)
+
   for (const student of studentsCopy) {
     $studentsList.append(newStudentTR(student))
   }
 }
+
+// Событие на Фильтр студентов
+formFilterEl.addEventListener('submit', function (event) {
+  event.preventDefault()
+  render(students)
+})
 
 // События сортировки
 $studentsListTHAll.forEach(element => {
@@ -78,26 +110,6 @@ const $inputBirthDay = document.getElementById('input-birthDay')
 const today = new Date().toISOString().split('T')[0];
 $inputBirthDay.setAttribute('max', today)
 
-// Слушатель на input's для их проверки
-// inputsEl.forEach(input => {
-//   input.addEventListener('input', checkInputs)
-// })
-
-// Проверка что все поля заполнены и кнопка добавить станет активна
-// function checkInputs() {
-//   let allInputsField = true
-
-//   inputsEl.forEach(input => {
-//     if (input.value.trim() === '') {
-//       allInputsField = false
-//     }
-
-//   })
-//   btnAddEl.disabled = !allInputsField
-// }
-
-// Добавление студента
-
 // добавляем класс ошибки если из input удалить текст
 function addErrClass() {
   for (let input of inputsEl) {
@@ -112,12 +124,13 @@ function addErrClass() {
 }
 addErrClass()
 
-// Скрывает показывает filter и меняет надпись
+// Скрывает показывает filter и меняет надпись кнопки
 btnShowFilterEl.addEventListener('click', function () {
-  document.getElementById('myFilter').classList.toggle('show')
+  document.getElementById('filter-form').classList.toggle('show')
   this.innerText = this.innerText == 'спрятать' ? 'показать' : 'спрятать'
 })
 
+// Добавление студента
 formEl.addEventListener('submit', function (event) {
   event.preventDefault();
 
