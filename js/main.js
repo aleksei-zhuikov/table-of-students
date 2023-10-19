@@ -5,7 +5,7 @@ const students = [
   new Student('Алена', 'Белых', 'Александровна', 2021, new Date(1998, 4, 11), 'Инжинерный'),
   new Student('Иван', 'Иванов', 'Иванович', 2001, new Date(1987, 1, 23), 'Авиационный'),
   new Student('Александр', 'Мухин', 'Сергеевич', 2011, new Date(1992, 2, 21), 'Химический'),
-  new Student('Марфа', 'Иванова', 'Алексеевна', 2011, new Date(1992, 2, 21), 'Химический'),
+  new Student('Марфа', 'Иванова', 'Алексеевна', 2000, new Date(1992, 2, 21), 'Химический'),
 ]
 
 const $studentsList = document.getElementById('students-list')
@@ -15,7 +15,7 @@ const inputsEl = formEl.querySelectorAll('input')
 const btnAddEl = formEl.querySelector('#btn-add')
 const btnShowFilterEl = document.querySelector('#show-filter')
 const formFilterEl = document.querySelector('#filter-form')
-
+const filterBoxBtn = document.querySelector('#filter-box_btn')
 
 let column = 'fio',
   columnDir = true;
@@ -100,6 +100,19 @@ $studentsListTHAll.forEach(element => {
   })
 })
 
+// Событие кнопок фильтра очистить, отменить
+filterBoxBtn.addEventListener('click', function (event) {
+  if (event.target.id === 'clearAll') {
+    event.preventDefault()
+    formFilterEl.reset()
+  }
+  if (event.target.id === 'undoAll') {
+    event.preventDefault()
+    formFilterEl.reset()
+    render()
+  }
+})
+
 // Установка Attribute max для input года обучения
 const $inputYear = document.getElementById('input-startLearn')
 const currentYear = new Date().getFullYear().toString()
@@ -110,7 +123,7 @@ const $inputBirthDay = document.getElementById('input-birthDay')
 const today = new Date().toISOString().split('T')[0];
 $inputBirthDay.setAttribute('max', today)
 
-// добавляем класс ошибки если из input удалить текст
+// Добавляем класс ошибки если из input удалить текст
 function addErrClass() {
   for (let input of inputsEl) {
     input.addEventListener('input', function () {
@@ -126,7 +139,7 @@ addErrClass()
 
 // Скрывает показывает filter и меняет надпись кнопки
 btnShowFilterEl.addEventListener('click', function () {
-  document.getElementById('filter-form').classList.toggle('show')
+  document.getElementById('filter-form').classList.toggle('visible')
   this.innerText = this.innerText == 'спрятать' ? 'показать' : 'спрятать'
 })
 

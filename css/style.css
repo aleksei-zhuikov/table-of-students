@@ -34,7 +34,7 @@ img {
 
 body {
   font-family: Arial, Verdana, sans-serif;
-  min-width: 320px
+  min-width: 492px
 }
 
 .container {
@@ -87,11 +87,25 @@ body {
   cursor: pointer;
 }
 
-#filter-form {
-  transform: translateX(-200%);
-  transition: transform 0.5s ease;
+/* Появление блока фильтрации */
+.hidden {
+  display: none;
 }
 
-#filter-form.show {
-  transform: translateX(0%);
+.visible {
+  display: block;
+  animation: showIn 1s ease;
+
+}
+
+@keyframes showIn {
+  from {
+    opacity: 0;
+    /* transform: translateX(-100%); */
+  }
+
+  to {
+    opacity: 1;
+    /* transform: translateX(0%); */
+  }
 }
