@@ -1,11 +1,12 @@
 import Student from './student.js'
 // Массив Студентов
 const students = [
-  new Student('Игорь', 'Фролов', 'Сергеевич', 2011, new Date(1992, 2, 21), 'Строительный'),
-  new Student('Алена', 'Белых', 'Александровна', 2021, new Date(1998, 4, 11), 'Инжинерный'),
-  new Student('Иван', 'Иванов', 'Иванович', 2001, new Date(1987, 1, 23), 'Авиационный'),
-  new Student('Александр', 'Мухин', 'Сергеевич', 2011, new Date(1992, 2, 21), 'Химический'),
-  new Student('Марфа', 'Иванова', 'Алексеевна', 2000, new Date(1992, 2, 21), 'Химический'),
+  new Student('Александр', 'Мухин', 'Сергеевич', 2000, new Date(1982, 12, 21), 'Исторический'),
+  new Student('Александр', 'Мухин', 'Сергеевич', 2001, new Date(1992, 2, 21), 'Химический'),
+  new Student('Игорь', 'Фролов', 'Сергеевич', 2011, new Date(1992, 11, 10), 'Строительный'),
+  new Student('Марфа', 'Иванова', 'Алексеевна', 2019, new Date(2009, 7, 12), 'Химический'),
+  new Student('Алена', 'Белых', 'Александровна', 2021, new Date(1998, 4, 11), 'Инженерный'),
+  new Student('Иван', 'Иванов', 'Иванович', 2022, new Date(1987, 1, 23), 'Авиационный'),
 ]
 
 const $studentsList = document.getElementById('students-list')
@@ -30,7 +31,7 @@ function newStudentTR(student) {
 
   $fioTD.textContent = student.fio
   $birthDateTD.textContent = student.getBirthDateString() + ' (' + student.getAge() + 'лет)'
-  $startLearnTD.textContent = student.startLearn + ' (' + student.getLearnPeriod() + ' лет)'
+  $startLearnTD.textContent = student.getLearnPeriod()
   $facultyTD.textContent = student.faculty
 
   $studentTR.append($fioTD)

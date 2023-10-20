@@ -14,7 +14,16 @@ export default class Student {
 
   getLearnPeriod() {
     const currentTime = new Date();
-    return currentTime.getFullYear() - this.startLearn
+    const learnYears = 4
+    const currentCourse = currentTime.getFullYear() - this.startLearn + 1
+    const thenEndLearn = this.startLearn + learnYears
+    const monthStartLearn = 9 // месяц сентябрь если он прошел то обучение закончено иначе выводится курс
+    const currentMonth = currentTime.getMonth() + 1
+    const currentYear = currentTime.getFullYear()
+
+    return `
+    ${this.startLearn} - ${thenEndLearn} (${currentCourse < learnYears || ((currentCourse < learnYears && currentMonth < monthStartLearn) || thenEndLearn === currentYear && currentMonth < monthStartLearn) ? `${currentCourse} курс` : 'закончил'})
+    `
   }
 
   getBirthDateString() {
