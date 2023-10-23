@@ -26,17 +26,21 @@ function newStudentTR(student) {
     $fioTD = document.createElement('td'),
     $birthDateTD = document.createElement('td'),
     $startLearnTD = document.createElement('td'),
-    $facultyTD = document.createElement('td')
+    $facultyTD = document.createElement('td'),
+    $tdDelete = document.createElement('td'),
+    $btnDeleteStudent = document.createElement('button')
 
   $fioTD.textContent = student.fio
   $birthDateTD.textContent = student.getBirthDateString() + ' (' + student.getAge() + 'лет)'
   $startLearnTD.textContent = student.getLearnPeriod()
   $facultyTD.textContent = student.faculty
+  $btnDeleteStudent.textContent = 'Удалить'
+  $btnDeleteStudent.classList.add('btn', 'btn-danger', 'btn-sm', 'w-100')
+  Object.assign($btnDeleteStudent, { type: 'button', id: 'btn-delete' })
 
-  $studentTR.append($fioTD)
-  $studentTR.append($birthDateTD)
-  $studentTR.append($startLearnTD)
-  $studentTR.append($facultyTD)
+  $tdDelete.append($btnDeleteStudent)
+
+  $studentTR.append($fioTD, $birthDateTD, $startLearnTD, $facultyTD, $tdDelete)
 
   return $studentTR;
 
