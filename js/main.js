@@ -1,7 +1,7 @@
 import Student from './student.js'
 // Массив Студентов
 const students = [
-  new Student('Иван', 'Иванов', 'Иванович', 2023, new Date(2005, 8, 17), 'Строительный'),
+  // new Student('Иван', 'Иванов', 'Иванович', 2023, new Date(2005, 8, 17), 'Строительный'),
   // new Student('Марфа', 'Иванова', 'Алексеевна', 2019, new Date(2009, 7, 12), 'Химический'),
   // new Student('Игорь', 'Фролов', 'Сергеевич', 2020, new Date(1992, 11, 10), 'Строительный'),
   // new Student('Алена', 'Белых', 'Александровна', 2021, new Date(1998, 4, 11), 'Инженерный'),
@@ -150,7 +150,7 @@ btnShowFilterEl.addEventListener('click', function () {
 // Добавление студента
 formEl.addEventListener('submit', function (event) {
   event.preventDefault();
-
+  const id = Math.floor(Date.now() * Math.random())
   students.push(new Student(
 
     document.getElementById('input-name').value,
@@ -158,7 +158,8 @@ formEl.addEventListener('submit', function (event) {
     document.getElementById('input-lastname').value,
     Number(document.getElementById('input-startLearn').value),
     new Date(document.getElementById('input-birthDay').value),
-    document.getElementById('input-faculty').value
+    document.getElementById('input-faculty').value,
+    id,
   ))
 
   render()

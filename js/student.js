@@ -1,11 +1,12 @@
 export default class Student {
-  constructor(name, surename, lastname, startLearn, birthDate, faculty) {
-    this.name = name;
+  constructor(name, surename, lastname, startLearn, birthDate, faculty, id) {
+    this.name = name
     this.surename = surename
     this.lastname = lastname
     this.startLearn = startLearn
     this.birthDate = birthDate
     this.faculty = faculty
+    this.id = id
   }
 
   get fio() {
