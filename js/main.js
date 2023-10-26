@@ -1,6 +1,6 @@
 import Student from './student.js'
 // Массив Студентов
-const students = [
+let students = [
   // new Student('Иван', 'Иванов', 'Иванович', 2023, new Date(2005, 8, 17), 'Строительный'),
   // new Student('Марфа', 'Иванова', 'Алексеевна', 2019, new Date(2009, 7, 12), 'Химический'),
   // new Student('Игорь', 'Фролов', 'Сергеевич', 2020, new Date(1992, 11, 10), 'Строительный'),
@@ -12,7 +12,6 @@ const $studentsList = document.getElementById('students-list')
 const $studentsListTHAll = document.querySelectorAll('.studentsTable th')
 const formEl = document.querySelector('#addStudent')
 const inputsEl = formEl.querySelectorAll('input')
-const btnAddEl = formEl.querySelector('#btn-add')
 const btnShowFilterEl = document.querySelector('#show-filter')
 const formFilterEl = document.querySelector('#filter-form')
 const filterBoxBtn = document.querySelector('#filter-box_btn')
@@ -30,6 +29,7 @@ function newStudentTR(student) {
     $tdDelete = document.createElement('td'),
     $btnDeleteStudent = document.createElement('button')
 
+  // $studentTR.setAttribute('id', student.id) // id на TR
   $fioTD.textContent = student.fio
   $birthDateTD.textContent = student.getBirthDateString() + ' (' + student.getAge() + 'лет)'
   $startLearnTD.textContent = student.getLearnPeriod()
@@ -40,10 +40,51 @@ function newStudentTR(student) {
 
   $tdDelete.append($btnDeleteStudent)
 
+  // Событие удаление студента
+  $btnDeleteStudent.addEventListener('click', function () {
+    console.log(student)
+    deleteStudent(student.id)
+    $studentTR.remove()
+
+  })
+
   $studentTR.append($fioTD, $birthDateTD, $startLearnTD, $facultyTD, $tdDelete)
 
   return $studentTR;
 
+}
+
+// Работа с LocalStorage
+let dataFromLS = localStorage.getItem('students')
+
+if (dataFromLS !== '' && dataFromLS !== null) {
+
+  let studentsList = JSON.parse(dataFromLS)
+  for (const item of studentsList) {
+    students.push(new Student(
+      item.name,
+      item.surename,
+      item.lastname,
+      item.startLearn,
+      new Date(item.birthDate),
+      item.faculty,
+      item.id
+    ))
+  }
+
+  render()
+
+  console.log('studentsList-FromLS if():', studentsList)
+
+}
+
+// Удаление студента
+function deleteStudent(id) {
+  // console.log(id) !!!
+  students = students.filter(student => student.id !== id)
+  // console.log('from deleteStud() students: ', students) !!!
+  saveLS(students)
+  render()
 }
 
 // Сортировка массива Студентов по параметрам
@@ -150,7 +191,10 @@ btnShowFilterEl.addEventListener('click', function () {
 // Добавление студента
 formEl.addEventListener('submit', function (event) {
   event.preventDefault();
+
+  // Добавляем id каждому студенту
   const id = Math.floor(Date.now() * Math.random())
+
   students.push(new Student(
 
     document.getElementById('input-name').value,
@@ -161,12 +205,36 @@ formEl.addEventListener('submit', function (event) {
     document.getElementById('input-faculty').value,
     id,
   ))
-
+  saveLS(students)
   render()
+
   this.reset()
 
 })
 render()
+
+
+// Сохраняем данные в LocalStorage
+function saveLS(arr) {
+  const saveArr = []
+  for (let student of arr) {
+    saveArr.push({
+      name: student.name,
+      surename: student.surename,
+      lastname: student.lastname,
+      startLearn: student.startLearn,
+      birthDate: student.birthDate,
+      faculty: student.faculty,
+      id: student.id
+
+    })
+
+  }
+  localStorage.setItem('students', JSON.stringify(saveArr))
+
+}
+
+
 
 
 
