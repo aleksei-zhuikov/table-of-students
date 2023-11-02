@@ -1,12 +1,6 @@
 import Student from './student.js'
 // Массив Студентов
-let students = [
-  // new Student('Иван', 'Иванов', 'Иванович', 2023, new Date(2005, 8, 17), 'Строительный'),
-  // new Student('Марфа', 'Иванова', 'Алексеевна', 2019, new Date(2009, 7, 12), 'Химический'),
-  // new Student('Игорь', 'Фролов', 'Сергеевич', 2020, new Date(1992, 11, 10), 'Строительный'),
-  // new Student('Алена', 'Белых', 'Александровна', 2021, new Date(1998, 4, 11), 'Инженерный'),
-  // new Student('Илья', 'Журавлев', 'Иванович', 2022, new Date(1987, 1, 23), 'Авиационный'),
-]
+let students = []
 
 const $studentsList = document.getElementById('students-list')
 const $studentsListTHAll = document.querySelectorAll('.studentsTable th')
