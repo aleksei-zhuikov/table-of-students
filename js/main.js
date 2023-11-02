@@ -42,10 +42,8 @@ function newStudentTR(student) {
 
   // Событие удаление студента
   $btnDeleteStudent.addEventListener('click', function () {
-    console.log(student)
     deleteStudent(student.id)
     $studentTR.remove()
-
   })
 
   $studentTR.append($fioTD, $birthDateTD, $startLearnTD, $facultyTD, $tdDelete)
@@ -73,16 +71,11 @@ if (dataFromLS !== '' && dataFromLS !== null) {
   }
 
   render()
-
-  console.log('studentsList-FromLS if():', studentsList)
-
 }
 
 // Удаление студента
 function deleteStudent(id) {
-  // console.log(id) !!!
   students = students.filter(student => student.id !== id)
-  // console.log('from deleteStud() students: ', students) !!!
   saveLS(students)
   render()
 }
